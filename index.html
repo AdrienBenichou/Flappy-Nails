@@ -192,6 +192,15 @@
     .g4{height:4px} .g8{height:8px} .g12{height:12px}
     .g16{height:16px} .g20{height:20px} .g24{height:24px}
     .loading { font-size: 13px; color: #9a5060; font-style: italic; }
+
+    /* ── STATS ── */
+    .stat-row {
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-val { font-size: 40px; font-weight: 800; color: var(--bx); line-height: 1; }
+    .stat-lbl { font-size: 10px; font-weight: 700; color: #9a5060; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -239,6 +248,10 @@
     <button class="btn btn-p" onclick="startGame()" style="max-width:260px;">Jouer</button>
     <div class="g8"></div>
     <button class="btn btn-s" onclick="openLeaderboard()" style="max-width:260px;">Voir le classement 🏆</button>
+    <div class="g8"></div>
+    <div id="menu-stats-wrap" style="display:none;width:100%;max-width:260px;">
+      <button class="btn btn-g" onclick="openStats()" style="width:100%;max-width:260px;">Mes stats 📊</button>
+    </div>
     <div class="g20"></div>
     <div class="section-label">Les lots à gagner</div>
     <div class="g8"></div>
@@ -266,13 +279,13 @@
     <div id="go-rank" style="font-size:13px;color:#9a5060;font-style:italic;text-align:center;max-width:280px;"></div>
     <div class="g20"></div>
 
-    <!-- Known user -->
+    <!-- Known user — auto-save, no manual button -->
     <div id="go-known" style="display:none;width:100%;align-items:center;flex-direction:column;">
       <div class="tag" id="go-wb-txt"></div>
       <div class="g12"></div>
-      <button class="btn btn-p" id="btn-save-known" onclick="saveKnown()">Sauvegarder mon score ✨</button>
-      <div class="g8"></div>
       <button class="btn btn-s" onclick="startGame()">Rejouer</button>
+      <div class="g8"></div>
+      <button class="btn btn-g" onclick="openLeaderboard()">Voir le classement</button>
       <div class="g8"></div>
       <button class="btn btn-g" onclick="notMe()">Ce n'est pas moi</button>
     </div>
@@ -326,6 +339,18 @@
     <button class="btn btn-g" onclick="show('s-menu')">Accueil</button>
   </div>
 
+  <!-- ══════════════ STATS ══════════════ -->
+  <div id="s-stats" class="scr">
+    <div style="font-size:22px;font-weight:800;color:var(--bx);">Mes stats 📊</div>
+    <div class="sub" id="stats-name"></div>
+    <div class="g16"></div>
+    <div id="stats-content"><div class="loading">Chargement...</div></div>
+    <div class="g16"></div>
+    <button class="btn btn-p" onclick="startGame()" style="max-width:260px;">Jouer</button>
+    <div class="g8"></div>
+    <button class="btn btn-g" onclick="show('s-menu')">Retour</button>
+  </div>
+
   <!-- ══════════════ LEADERBOARD ══════════════ -->
   <div id="s-lb" class="scr">
     <div style="font-size:22px;font-weight:800;color:var(--bx);">Hall of Fame</div>
@@ -375,7 +400,7 @@ let audioCtx     = null;
 // ═══════════════════════════════════════════════════════
 //  SCREEN MANAGER
 // ═══════════════════════════════════════════════════════
-const SCREENS = ['s-intro','s-menu','s-go','s-save','s-saved','s-lb'];
+const SCREENS = ['s-intro','s-menu','s-go','s-save','s-saved','s-stats','s-lb'];
 
 function show(id) {
   SCREENS.forEach(s => {
@@ -405,6 +430,7 @@ function openMenu() {
   const wb = document.getElementById('menu-wb');
   if (ps) { wb.textContent = '👋 Bon retour ' + ps + ' !'; wb.style.display='block'; }
   else wb.style.display = 'none';
+  document.getElementById('menu-stats-wrap').style.display = ps ? 'block' : 'none';
 }
 
 // ═══════════════════════════════════════════════════════
@@ -508,16 +534,25 @@ async function openGameover() {
   if (ps && em) {
     goKnown.style.cssText = 'display:flex;flex-direction:column;align-items:center;width:100%;';
     goNew.style.display = 'none';
-    const btnK = document.getElementById('btn-save-known');
-    if (isNewPB) {
-      // Auto-save silently — player doesn't need to do anything
-      document.getElementById('go-wb-txt').textContent = '✨ Sauvegarde en cours...';
-      if (btnK) { btnK.disabled = true; btnK.style.display = 'none'; }
-      doSave(ps, em, pendingScore, false);
-    } else {
-      document.getElementById('go-wb-txt').textContent = '👋 ' + ps + ', prêt·e à sauvegarder ?';
-      if (btnK) { btnK.disabled = false; btnK.style.display = ''; btnK.textContent = 'Sauvegarder mon score ✨'; }
-    }
+    const tag = document.getElementById('go-wb-txt');
+    const rankEl = document.getElementById('go-rank');
+    tag.textContent = '✨ Sauvegarde en cours...';
+    // Always auto-save — player never has to enter info twice
+    (async () => {
+      try {
+        await saveScore(ps, em, pendingScore, false);
+        await fetchLB(true);
+        const idx = myRank(em);
+        if (idx >= 0) {
+          const label = idx < 10 ? rankLabel(idx) : (idx+1)+'e';
+          rankEl.textContent = 'Tu es ' + label + ' du classement 🎉';
+        }
+        tag.textContent = '✅ Score enregistré !';
+      } catch(e) {
+        console.error(e);
+        tag.textContent = '⚠️ Erreur réseau — réessaie plus tard';
+      }
+    })();
   } else {
     goKnown.style.display = 'none';
     goNew.style.cssText = 'display:flex;flex-direction:column;align-items:center;width:100%;';
@@ -568,39 +603,57 @@ async function submitScore() {
   await doSave(ps, em, pendingScore, opt);
 }
 
-async function saveKnown() {
-  const ps = get(LS.PS), em = get(LS.EM);
-  if (!ps || !em) return;
-  await doSave(ps, em, pendingScore, false);
-}
-
 async function doSave(pseudo, email, score, optin) {
   if (saving) return;
   saving = true;
-
-  const btnSub   = document.getElementById('btn-sub');
-  const btnKnown = document.getElementById('btn-save-known');
-  [btnSub, btnKnown].forEach(b => b && (b.disabled = true));
-  if (btnSub)   btnSub.textContent   = 'Sauvegarde...';
-  if (btnKnown) btnKnown.textContent = 'Sauvegarde... ⏳';
-
+  const btnSub = document.getElementById('btn-sub');
+  if (btnSub) { btnSub.disabled = true; btnSub.textContent = 'Sauvegarde...'; }
   try {
     await saveScore(pseudo, email, score, optin);
     const lb  = await fetchLB(true);
     const idx = lb.findIndex(r => r.email === email);
-    const el  = document.getElementById('saved-rank');
-    el.textContent = idx >= 0
+    document.getElementById('saved-rank').textContent = idx >= 0
       ? 'Tu es ' + rankLabel(idx) + ' au classement ! 🎉'
       : 'Score enregistré avec succès !';
     show('s-saved');
   } catch(e) {
     console.error(e);
-    [btnSub, btnKnown].forEach(b => b && (b.disabled = false));
-    if (btnSub)   btnSub.textContent   = 'Sauvegarder 💅';
-    if (btnKnown) btnKnown.textContent = 'Sauvegarder mon score ✨';
+    if (btnSub) { btnSub.disabled = false; btnSub.textContent = 'Sauvegarder'; }
     alert('Erreur lors de la sauvegarde, réessaie !');
   } finally {
     saving = false;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  STATS SCREEN
+// ═══════════════════════════════════════════════════════
+async function openStats() {
+  show('s-stats');
+  const em = get(LS.EM), ps = get(LS.PS);
+  document.getElementById('stats-name').textContent = ps || '';
+  const content = document.getElementById('stats-content');
+  content.innerHTML = '<div class="loading">Chargement...</div>';
+  try {
+    const [{ data }, _] = await Promise.all([
+      db.from('scores').select('score').eq('email', em),
+      fetchLB()
+    ]);
+    const scores = (data || []).map(r => r.score);
+    const count  = scores.length;
+    const best   = count ? Math.max(...scores) : 0;
+    const avg    = count ? Math.round(scores.reduce((a,b)=>a+b,0) / count) : 0;
+    const idx    = myRank(em);
+    const rankTxt = idx >= 0 ? (idx < 10 ? rankLabel(idx) : (idx+1)+'e') : '—';
+    content.innerHTML = `
+      <div class="card" style="width:100%;max-width:320px;">
+        <div class="stat-row"><div class="stat-val">${count}</div><div class="stat-lbl">Parties jouées</div></div>
+        <div class="stat-row"><div class="stat-val">${best}</div><div class="stat-lbl">Meilleur score</div></div>
+        <div class="stat-row"><div class="stat-val">${avg}</div><div class="stat-lbl">Score moyen</div></div>
+        <div class="stat-row"><div class="stat-val">${rankTxt}</div><div class="stat-lbl">Rang au classement</div></div>
+      </div>`;
+  } catch(e) {
+    content.innerHTML = '<div class="loading">Impossible de charger les stats.</div>';
   }
 }
 
@@ -877,8 +930,40 @@ function playPoint() {
   });
 }
 
+// ── TAP HINT (drawn over idle in 'ready' state) ──
+function drawTapHint() {
+  const pulse = 0.72 + 0.28 * Math.sin(idleF * 0.1);
+  const text  = 'Tape pour décoller ! 👆';
+  const fs    = Math.round(sx(15));
+  ctx.font    = `600 ${fs}px Poppins,sans-serif`;
+  ctx.textAlign = 'center';
+  const cx = canvas.width / 2, cy = sy(BH * 0.72);
+  const tw = ctx.measureText(text).width;
+  const pad = sx(18), h = sy(40), r = h / 2;
+  const bx = cx - tw/2 - pad, w = tw + pad * 2;
+  ctx.globalAlpha = pulse * 0.92;
+  ctx.fillStyle = '#9B1F37';
+  ctx.beginPath();
+  ctx.moveTo(bx+r, cy-r); ctx.lineTo(bx+w-r, cy-r);
+  ctx.quadraticCurveTo(bx+w, cy-r, bx+w, cy);
+  ctx.lineTo(bx+w, cy); ctx.quadraticCurveTo(bx+w, cy+r, bx+w-r, cy+r);
+  ctx.lineTo(bx+r, cy+r); ctx.quadraticCurveTo(bx, cy+r, bx, cy);
+  ctx.lineTo(bx, cy); ctx.quadraticCurveTo(bx, cy-r, bx+r, cy-r);
+  ctx.fill();
+  ctx.globalAlpha = pulse;
+  ctx.fillStyle = '#fff';
+  ctx.fillText(text, cx, cy + fs * 0.38);
+  ctx.globalAlpha = 1;
+}
+
 // ── JUMP ──
 function doJump() {
+  if (gState === 'ready') {
+    gState = 'playing';
+    bird.vy = JUMP_V;
+    playJump();
+    return;
+  }
   if (gState !== 'playing') return;
   bird.vy = JUMP_V;
   playJump();
@@ -948,9 +1033,12 @@ function loop(ts) {
 
   if (gState === 'playing') {
     updateGame(dt);
-    drawGame(); // always draw — captures the death frame too
+    drawGame();
   } else if (gState === 'dead') {
     // hold last drawn frame; overlay fades in above it
+  } else if (gState === 'ready') {
+    drawIdle(dt);
+    drawTapHint();
   } else {
     drawIdle(dt);
   }
@@ -960,9 +1048,9 @@ function loop(ts) {
 
 // ─────────────────────────────────────────────────────
 function startGame() {
-  prevBest = geti(LS.BEST); // snapshot before game updates it
+  prevBest = geti(LS.BEST);
   resetGame();
-  gState = 'playing';
+  gState = 'ready'; // wait for first tap before physics start
   show(null);
 }
 
