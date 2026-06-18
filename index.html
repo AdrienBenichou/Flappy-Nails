@@ -55,7 +55,7 @@
       text-shadow: 3px 3px 0 rgba(92,21,38,0.25);
     }
     .sub { font-size: 11px; color: #9a5060; font-weight: 500; margin-top: 6px; text-align: center; }
-    .section-label { font-size: 9px; font-weight: 800; color: var(--bxd); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+    .section-label { font-family: 'BrasikaDisplay', 'Poppins', sans-serif; font-size: 11px; font-weight: 800; color: var(--bxd); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
 
     /* ── BUTTONS ── */
     .btn {
@@ -191,9 +191,8 @@
     <div class="g8"></div>
     <div id="go-highlight" class="tag" style="display:none;"></div>
     <div class="g20"></div>
+    <div id="go-wb-txt" style="display:none;position:absolute;bottom:8px;right:8px;font-size:9px;padding:4px 8px;background:var(--pink);color:var(--bxd);border:1px solid var(--border);border-radius:5px;box-shadow:1px 1px 0 var(--border);"></div>
     <div id="go-known" style="display:none;width:100%;align-items:center;flex-direction:column;">
-      <div class="tag" id="go-wb-txt" style="font-size:10px;padding:6px 10px;"></div>
-      <div class="g12"></div>
       <button class="btn btn-s" onclick="startGame()">Rejouer</button>
       <div class="g8"></div>
       <button class="btn btn-g" onclick="openLeaderboard()">Voir le classement</button>
@@ -301,7 +300,7 @@ function setHighlight(idx0){
   const hl=document.getElementById('go-highlight'),cta=document.getElementById('go-new-cta');
   if(idx0>=0&&idx0<3){
     const pc=['-50%','-35%','-20%'][idx0],med=['🥇','🥈','🥉'][idx0];
-    hl.innerHTML=med+' <b>'+pc+'</b> si tu restes à cette position jusqu\'au 31 juin';
+    hl.innerHTML=med+' <b>'+pc+' de réduction</b> si tu restes à cette position jusqu\'au 31 juin';
     hl.style.cssText='display:block;background:var(--bx);color:var(--cream);font-weight:700;font-family:\'BrasikaDisplay\',\'Poppins\',sans-serif;font-size:12px;';
     if(cta) cta.textContent='🏆 S\'inscrire pour gagner '+pc;
   }else if(idx0<0||idx0>=10){
@@ -330,11 +329,11 @@ async function openGameover(){
   const ps=get(LS.PS),em=get(LS.EM),goKnown=document.getElementById('go-known'),goNew=document.getElementById('go-new');
   if(ps&&em){
     goKnown.style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; goNew.style.display='none';
-    const tag=document.getElementById('go-wb-txt'); tag.textContent='✨ Sauvegarde en cours...';
+    const tag=document.getElementById('go-wb-txt'); tag.style.display='block'; tag.textContent='✨ Sauvegarde en cours...';
     (async()=>{try{await saveScore(ps,em,pendingScore,false);await fetchLB(true);const idx=myRank(em);if(idx>=0){const label=idx<10?rankLabel(idx):(idx+1)+'e';rankEl.textContent='Tu es '+label+' ! 🎉';setHighlight(idx);}tag.textContent='✅ Score enregistré !';}catch(e){console.error(e);tag.textContent='⚠️ Erreur réseau';}})();
   }else{goKnown.style.display='none';goNew.style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;';}
 }
-function notMe(){ localStorage.removeItem(LS.PS);localStorage.removeItem(LS.EM); document.getElementById('go-known').style.display='none'; document.getElementById('go-new').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; }
+function notMe(){ localStorage.removeItem(LS.PS);localStorage.removeItem(LS.EM); document.getElementById('go-known').style.display='none'; document.getElementById('go-wb-txt').style.display='none'; document.getElementById('go-new').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; }
 function openSave(){ document.getElementById('inp-ps').value=get(LS.PS)||''; document.getElementById('inp-em').value=get(LS.EM)||''; document.getElementById('inp-opt').checked=false; clearErr(); show('s-save'); }
 function clearErr(){ ['ps','em'].forEach(f=>{const e=document.getElementById('err-'+f);if(e)e.style.display='none';}); }
 function showErr(f,msg){ const e=document.getElementById('err-'+f);if(e){e.textContent=msg;e.style.display='block';} }
