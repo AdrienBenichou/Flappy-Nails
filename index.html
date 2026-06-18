@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Flappy Nails 💅 — Janne sans e</title>
+  <title>Flappy Nails 💅 — Janne_sans_e</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     @font-face {
@@ -132,13 +132,11 @@
   <!-- INTRO -->
   <div id="s-intro" class="scr">
     <div class="ttl">Flappy<br>Nails</div>
-    <div class="sub">Le défi nail art de Janne sans e</div>
     <div class="g20"></div>
     <div class="card">
       <div class="rule"><span class="ic">⭐</span><span>Tape l'écran pour faire voler l'étoile</span></div>
-      <div class="rule"><span class="ic">💅</span><span>Esquive les ongles des clientes</span></div>
-      <div class="rule"><span class="ic">🏆</span><span>Rejoins le classement après chaque run</span></div>
-      <div class="rule"><span class="ic">🎁</span><span>Top 3 = bon de réduction Janne sans e !</span></div>
+      <div class="rule"><span class="ic">💅</span><span>Esquive les inspis des client·e</span></div>
+      <div class="rule"><span class="ic">🏆</span><span>Rejoins le classement</span></div>
     </div>
     <div class="g16"></div>
     <div class="section-label">Les lots</div>
@@ -157,7 +155,7 @@
   <!-- MENU -->
   <div id="s-menu" class="scr">
     <div class="ttl">Flappy<br>Nails</div>
-    <div class="sub">Janne sans e · Marseille 💅</div>
+    <div class="sub">Janne_sans_e · Marseille 💅</div>
     <div class="g12"></div>
     <div id="menu-wb" class="tag" style="display:none;"></div>
     <div class="g16"></div>
@@ -201,8 +199,8 @@
       <button class="btn btn-g" onclick="notMe()">Ce n'est pas moi</button>
     </div>
     <div id="go-new" style="display:none;width:100%;align-items:center;flex-direction:column;">
-      <button class="btn btn-p" onclick="openSave()">Rejoindre le classement</button>
-      <div class="g8"></div>
+      <button class="btn btn-p" onclick="openSave()" style="font-size:17px;padding:18px 24px;box-shadow:4px 4px 0 var(--bxd);">🏆 S'inscrire au classement</button>
+      <div class="g12"></div>
       <button class="btn btn-s" onclick="startGame()">Rejouer</button>
       <div class="g8"></div>
       <button class="btn btn-g" onclick="openLeaderboard()">Voir le classement</button>
@@ -281,7 +279,7 @@ let pendingScore=0, prevBest=0, lbCache=null, lbFull=[], saving=false, lastTime=
 
 const SCREENS=['s-intro','s-menu','s-go','s-save','s-saved','s-stats','s-lb'];
 function show(id) { SCREENS.forEach(s=>{const el=document.getElementById(s);if(el)el.classList.remove('on');}); if(id){const el=document.getElementById(id);if(el)el.classList.add('on');} }
-function dismissIntro(){ set(LS.SEEN,'1'); openMenu(); }
+function dismissIntro(){ set(LS.SEEN,'1'); startGame(); }
 function openMenu(){ show('s-menu'); const ps=get(LS.PS),wb=document.getElementById('menu-wb'); if(ps){wb.textContent='👋 Bon retour '+ps+' !';wb.style.display='block';}else wb.style.display='none'; document.getElementById('menu-stats-wrap').style.display=ps?'block':'none'; }
 
 async function fetchLB(force=false){
@@ -348,7 +346,7 @@ async function openLeaderboard(){
 // ═══════════════════════════════════════════════════
 const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const BW=390, BH=660;
-const GRAV=0.52, JUMP_V=-5.8, PW=52;
+const GRAV=0.52, JUMP_V=-6.2, PW=52;
 const GAP_START=188, GAP_MIN=115, SPD_START=2.0, SPD_MAX=5.0;
 const RAMP_START=300, RAMP_END=1500, PIPE_INT_BASE=115;
 const GROUND_Y=BH-58;
