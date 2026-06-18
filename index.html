@@ -192,7 +192,7 @@
     <div id="go-highlight" class="tag" style="display:none;"></div>
     <div class="g20"></div>
     <div id="go-known" style="display:none;width:100%;align-items:center;flex-direction:column;">
-      <div class="tag" id="go-wb-txt"></div>
+      <div class="tag" id="go-wb-txt" style="font-size:10px;padding:6px 10px;"></div>
       <div class="g12"></div>
       <button class="btn btn-s" onclick="startGame()">Rejouer</button>
       <div class="g8"></div>
@@ -301,12 +301,12 @@ function setHighlight(idx0){
   const hl=document.getElementById('go-highlight'),cta=document.getElementById('go-new-cta');
   if(idx0>=0&&idx0<3){
     const pc=['-50%','-35%','-20%'][idx0],med=['🥇','🥈','🥉'][idx0];
-    hl.innerHTML=med+' Tu gagnes <b>'+pc+'</b> de réduction !';
-    hl.style.cssText='display:block;background:var(--bx);color:var(--cream);font-weight:700;';
+    hl.innerHTML=med+' <b>'+pc+'</b> si tu restes à cette position jusqu\'au 31 juin';
+    hl.style.cssText='display:block;background:var(--bx);color:var(--cream);font-weight:700;font-family:\'BrasikaDisplay\',\'Poppins\',sans-serif;font-size:12px;';
     if(cta) cta.textContent='🏆 S\'inscrire pour gagner '+pc;
   }else if(idx0<0||idx0>=10){
     hl.textContent='🎲 Inscris-toi pour le tirage au sort -50% !';
-    hl.style.cssText='display:block;background:var(--bx);color:var(--cream);font-weight:700;';
+    hl.style.cssText='display:block;background:var(--bx);color:var(--cream);font-weight:700;font-family:\'BrasikaDisplay\',\'Poppins\',sans-serif;font-size:12px;';
     if(cta) cta.textContent='🎲 S\'inscrire au tirage au sort';
   }else{
     hl.style.display='none';
@@ -365,7 +365,7 @@ async function openLeaderboard(){
 const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const BW=390, BH=660;
 const GRAV=0.52, JUMP_V=-7.0, PW=52;
-const GAP_START=188, GAP_MIN=115, SPD_START=2.0, SPD_MAX=5.0;
+const GAP_START=188, GAP_MIN=148, SPD_START=2.0, SPD_MAX=5.0;
 const RAMP_START=300, RAMP_END=1500, PIPE_INT_BASE=180;
 const GROUND_Y=BH-58;
 let gState='idle', gameScore=0, bird, pipes, frame, nextPipeFrame, particles, scale;
