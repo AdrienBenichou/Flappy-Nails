@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Flappy Nails 💅 — Janne_sans_e</title>
+  <title>Flappy Nails 💅 — Janne sans e</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     @font-face {
@@ -55,7 +55,7 @@
       text-shadow: 3px 3px 0 rgba(92,21,38,0.25);
     }
     .sub { font-size: 11px; color: #9a5060; font-weight: 500; margin-top: 6px; text-align: center; }
-    .section-label { font-family: 'BrasikaDisplay', 'Poppins', sans-serif; font-size: 11px; font-weight: 800; color: var(--bxd); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+    .section-label { font-size: 9px; font-weight: 800; color: var(--bxd); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
 
     /* ── BUTTONS ── */
     .btn {
@@ -70,8 +70,6 @@
     .btn-p:hover { background: var(--bxd); }
     .btn-s { background: var(--pink); color: var(--bx); box-shadow: 3px 3px 0 var(--border); border-color: var(--border); }
     .btn-g { background: transparent; color: var(--bx); font-size: 12px; font-weight: 600; text-decoration: underline; box-shadow: none; border: none; padding: 8px; }
-    .btn-o { background: var(--cream); color: var(--bx); box-shadow: 3px 3px 0 var(--border); }
-    .btn-pill { width: auto; max-width: none; padding: 8px 16px; font-size: 11px; border-radius: 20px; box-shadow: 2px 2px 0 var(--border); }
 
     /* ── CARD ── */
     .card { background: var(--cream); border: 2px solid var(--border); border-radius: 8px; padding: 14px 16px; width: 100%; max-width: 320px; box-shadow: 3px 3px 0 var(--border); }
@@ -134,11 +132,13 @@
   <!-- INTRO -->
   <div id="s-intro" class="scr">
     <div class="ttl">Flappy<br>Nails</div>
+    <div class="sub">Le défi nail art de Janne sans e</div>
     <div class="g20"></div>
     <div class="card">
       <div class="rule"><span class="ic">⭐</span><span>Tape l'écran pour faire voler l'étoile</span></div>
-      <div class="rule"><span class="ic">💅</span><span>Esquive les inspis des client·e</span></div>
-      <div class="rule"><span class="ic">📊</span><span>Rejoins le classement</span></div>
+      <div class="rule"><span class="ic">💅</span><span>Esquive les ongles des clientes</span></div>
+      <div class="rule"><span class="ic">🏆</span><span>Rejoins le classement après chaque run</span></div>
+      <div class="rule"><span class="ic">🎁</span><span>Top 3 = bon de réduction Janne sans e !</span></div>
     </div>
     <div class="g16"></div>
     <div class="section-label">Les lots</div>
@@ -157,16 +157,16 @@
   <!-- MENU -->
   <div id="s-menu" class="scr">
     <div class="ttl">Flappy<br>Nails</div>
-    <div class="sub">Janne_sans_e · Marseille 💅</div>
+    <div class="sub">Janne sans e · Marseille 💅</div>
     <div class="g12"></div>
     <div id="menu-wb" class="tag" style="display:none;"></div>
     <div class="g16"></div>
     <button class="btn btn-p" onclick="startGame()" style="max-width:260px;">▶ Jouer</button>
     <div class="g8"></div>
-    <button class="btn btn-s" onclick="openLeaderboard()" style="max-width:260px;">Classement 📊</button>
+    <button class="btn btn-s" onclick="openLeaderboard()" style="max-width:260px;">Classement 🏆</button>
     <div class="g8"></div>
     <div id="menu-stats-wrap" style="display:none;width:100%;max-width:260px;">
-      <button class="btn btn-g" onclick="openStats()" style="width:100%;max-width:260px;">Mes stats 📈</button>
+      <button class="btn btn-g" onclick="openStats()" style="width:100%;max-width:260px;">Mes stats 📊</button>
     </div>
     <div class="g20"></div>
     <div class="section-label">Les lots</div>
@@ -190,22 +190,22 @@
     <div id="go-rec" style="font-size:11px;color:#9a5060;display:none;"><span id="go-rec-lbl">🏆 Record : </span><span id="go-rec-val">0</span> pts</div>
     <div class="g8"></div>
     <div id="go-rank" style="font-size:12px;color:#9a5060;font-style:italic;text-align:center;max-width:280px;"></div>
-    <div class="g8"></div>
-    <div id="go-highlight" style="display:none;font-size:11px;color:#9a5060;text-align:center;max-width:280px;font-family:'BrasikaDisplay','Poppins',sans-serif;"></div>
     <div class="g20"></div>
-    <div id="go-wb-txt" style="display:none;position:absolute;bottom:8px;right:8px;font-size:9px;padding:4px 8px;background:var(--pink);color:var(--bxd);border:1px solid var(--border);border-radius:5px;box-shadow:1px 1px 0 var(--border);"></div>
     <div id="go-known" style="display:none;width:100%;align-items:center;flex-direction:column;">
-      <button class="btn btn-p" onclick="startGame()">Rejouer</button>
-      <div class="g8"></div>
-      <button class="btn btn-o" onclick="openLeaderboard()" style="max-width:260px;">Voir le classement 📊</button>
-    </div>
-    <button id="go-notme" class="btn btn-s btn-pill" onclick="notMe()" style="display:none;position:absolute;bottom:14px;left:14px;">Ce n'est pas moi</button>
-    <div id="go-new" style="display:none;width:100%;align-items:center;flex-direction:column;">
-      <button class="btn btn-p" id="go-new-cta" onclick="openSave()" style="font-size:17px;padding:18px 24px;box-shadow:4px 4px 0 var(--bxd);">📊 S'inscrire au classement</button>
+      <div class="tag" id="go-wb-txt"></div>
       <div class="g12"></div>
       <button class="btn btn-s" onclick="startGame()">Rejouer</button>
       <div class="g8"></div>
-      <button class="btn btn-o" onclick="openLeaderboard()" style="max-width:260px;">Voir le classement 📊</button>
+      <button class="btn btn-g" onclick="openLeaderboard()">Voir le classement</button>
+      <div class="g8"></div>
+      <button class="btn btn-g" onclick="notMe()">Ce n'est pas moi</button>
+    </div>
+    <div id="go-new" style="display:none;width:100%;align-items:center;flex-direction:column;">
+      <button class="btn btn-p" onclick="openSave()">Rejoindre le classement</button>
+      <div class="g8"></div>
+      <button class="btn btn-s" onclick="startGame()">Rejouer</button>
+      <div class="g8"></div>
+      <button class="btn btn-g" onclick="openLeaderboard()">Voir le classement</button>
     </div>
   </div>
 
@@ -230,7 +230,7 @@
     <div class="g8"></div>
     <div id="saved-rank" style="font-size:14px;color:#9a5060;font-weight:600;text-align:center;"></div>
     <div class="g24"></div>
-    <button class="btn btn-p" onclick="openLeaderboard()">Classement 📊</button>
+    <button class="btn btn-p" onclick="openLeaderboard()">Classement 🏆</button>
     <div class="g8"></div>
     <button class="btn btn-s" onclick="startGame()">Rejouer</button>
     <div class="g8"></div>
@@ -239,7 +239,7 @@
 
   <!-- STATS -->
   <div id="s-stats" class="scr">
-    <div style="font-family:'BrasikaDisplay',sans-serif;font-size:28px;color:var(--bx);">Mes stats 📈</div>
+    <div style="font-family:'BrasikaDisplay',sans-serif;font-size:28px;color:var(--bx);">Mes stats 📊</div>
     <div class="sub" id="stats-name"></div>
     <div class="g16"></div>
     <div id="stats-content"><div class="loading">Chargement...</div></div>
@@ -281,7 +281,7 @@ let pendingScore=0, prevBest=0, lbCache=null, lbFull=[], saving=false, lastTime=
 
 const SCREENS=['s-intro','s-menu','s-go','s-save','s-saved','s-stats','s-lb'];
 function show(id) { SCREENS.forEach(s=>{const el=document.getElementById(s);if(el)el.classList.remove('on');}); if(id){const el=document.getElementById(id);if(el)el.classList.add('on');} }
-function dismissIntro(){ set(LS.SEEN,'1'); startGame(); }
+function dismissIntro(){ set(LS.SEEN,'1'); openMenu(); }
 function openMenu(){ show('s-menu'); const ps=get(LS.PS),wb=document.getElementById('menu-wb'); if(ps){wb.textContent='👋 Bon retour '+ps+' !';wb.style.display='block';}else wb.style.display='none'; document.getElementById('menu-stats-wrap').style.display=ps?'block':'none'; }
 
 async function fetchLB(force=false){
@@ -297,22 +297,6 @@ function rankLabel(i){ return i===0?'🥇 1er·ère':i===1?'🥈 2e':i===2?'🥉
 function rankClass(i){ return i===0?'lbr r1':i===1?'lbr r2':i===2?'lbr r3':'lbr'; }
 function esc(s){ return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-function setHighlight(idx0){
-  const hl=document.getElementById('go-highlight'),cta=document.getElementById('go-new-cta');
-  if(idx0>=0&&idx0<3){
-    const pc=['-50%','-35%','-20%'][idx0],med=['🥇','🥈','🥉'][idx0];
-    hl.innerHTML=med+' '+pc+' de réduction si tu restes à cette position jusqu\'au 31 juin';
-    hl.style.display='block';
-    if(cta) cta.innerHTML='📊 S\'inscrire pour gagner '+pc;
-  }else if(idx0<0||idx0>=10){
-    hl.textContent='🎲 Inscris-toi pour le tirage au sort -50% !';
-    hl.style.display='block';
-    if(cta) cta.innerHTML='📊 S\'inscrire au classement<br><span style="font-size:11px;font-weight:400;">et être éligible au tirage au sort</span>';
-  }else{
-    hl.style.display='none';
-    if(cta) cta.innerHTML='📊 S\'inscrire au classement<br><span style="font-size:11px;font-weight:400;">et être éligible au tirage au sort</span>';
-  }
-}
 async function openGameover(){
   pendingScore=gameScore; show('s-go');
   document.getElementById('go-sc').textContent=pendingScore;
@@ -324,17 +308,17 @@ async function openGameover(){
   else recEl.style.display='none';
   await fetchLB();
   const rankEl=document.getElementById('go-rank'),knownEm=get(LS.EM);
-  if(knownEm&&lbFull.length>0){const idx=myRank(knownEm);if(idx>=0){const label=idx<10?rankLabel(idx):(idx+1)+'e';rankEl.textContent='Tu es toujours '+label+' du classement 👀';setHighlight(idx);}else{rankEl.textContent='Rejoins le classement pour voir ton rang !';setHighlight(-1);}}
-  else if(lbFull.length===0){ rankEl.textContent='Tu serais premier·ère ! 👑'; setHighlight(0); }
-  else{const pos=lbFull.filter(r=>r.score>pendingScore).length+1;rankEl.textContent=pos<=10||lbFull.length<10?'Tu aurais été '+rankLabel(pos-1)+' 👀':'Encore un effort pour le top 10 !';setHighlight(pos-1);}
-  const ps=get(LS.PS),em=get(LS.EM),goKnown=document.getElementById('go-known'),goNew=document.getElementById('go-new'),goNotMe=document.getElementById('go-notme');
+  if(knownEm&&lbFull.length>0){const idx=myRank(knownEm);if(idx>=0){const label=idx<10?rankLabel(idx):(idx+1)+'e';rankEl.textContent='Tu es toujours '+label+' du classement 👀';}else rankEl.textContent='Rejoins le classement pour voir ton rang !';}
+  else if(lbFull.length===0) rankEl.textContent='Tu serais premier·ère ! 👑';
+  else{const pos=lbFull.filter(r=>r.score>pendingScore).length+1;rankEl.textContent=pos<=10||lbFull.length<10?'Tu aurais été '+rankLabel(pos-1)+' 👀':'Encore un effort pour le top 10 !';}
+  const ps=get(LS.PS),em=get(LS.EM),goKnown=document.getElementById('go-known'),goNew=document.getElementById('go-new');
   if(ps&&em){
-    goKnown.style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; goNew.style.display='none'; goNotMe.style.display='block';
-    const tag=document.getElementById('go-wb-txt'); tag.style.display='block'; tag.textContent='✨ Sauvegarde en cours...';
-    (async()=>{try{await saveScore(ps,em,pendingScore,false);await fetchLB(true);const idx=myRank(em);if(idx>=0){const label=idx<10?rankLabel(idx):(idx+1)+'e';rankEl.textContent='Tu es '+label+' ! 🎉';setHighlight(idx);}tag.textContent='✅ Score enregistré !';}catch(e){console.error(e);tag.textContent='⚠️ Erreur réseau';}})();
-  }else{goKnown.style.display='none'; goNotMe.style.display='none'; goNew.style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;';}
+    goKnown.style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; goNew.style.display='none';
+    const tag=document.getElementById('go-wb-txt'); tag.textContent='✨ Sauvegarde en cours...';
+    (async()=>{try{await saveScore(ps,em,pendingScore,false);await fetchLB(true);const idx=myRank(em);if(idx>=0){const label=idx<10?rankLabel(idx):(idx+1)+'e';rankEl.textContent='Tu es '+label+' ! 🎉';}tag.textContent='✅ Score enregistré !';}catch(e){console.error(e);tag.textContent='⚠️ Erreur réseau';}})();
+  }else{goKnown.style.display='none';goNew.style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;';}
 }
-function notMe(){ localStorage.removeItem(LS.PS);localStorage.removeItem(LS.EM); document.getElementById('go-known').style.display='none'; document.getElementById('go-wb-txt').style.display='none'; document.getElementById('go-notme').style.display='none'; document.getElementById('go-new').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; }
+function notMe(){ localStorage.removeItem(LS.PS);localStorage.removeItem(LS.EM); document.getElementById('go-known').style.display='none'; document.getElementById('go-new').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;'; }
 function openSave(){ document.getElementById('inp-ps').value=get(LS.PS)||''; document.getElementById('inp-em').value=get(LS.EM)||''; document.getElementById('inp-opt').checked=false; clearErr(); show('s-save'); }
 function clearErr(){ ['ps','em'].forEach(f=>{const e=document.getElementById('err-'+f);if(e)e.style.display='none';}); }
 function showErr(f,msg){ const e=document.getElementById('err-'+f);if(e){e.textContent=msg;e.style.display='block';} }
@@ -364,9 +348,9 @@ async function openLeaderboard(){
 // ═══════════════════════════════════════════════════
 const canvas=document.getElementById('c'), ctx=canvas.getContext('2d');
 const BW=390, BH=660;
-const GRAV=0.52, JUMP_V=-7.0, PW=52;
-const GAP_START=188, GAP_MIN=148, SPD_START=2.0, SPD_MAX=5.0;
-const RAMP_START=300, RAMP_END=1500, PIPE_INT_BASE=180;
+const GRAV=0.52, JUMP_V=-5.8, PW=52;
+const GAP_START=188, GAP_MIN=115, SPD_START=2.0, SPD_MAX=5.0;
+const RAMP_START=300, RAMP_END=1500, PIPE_INT_BASE=115;
 const GROUND_Y=BH-58;
 let gState='idle', gameScore=0, bird, pipes, frame, nextPipeFrame, particles, scale;
 let idleF=0, trail=[], trailTimer=0;
@@ -602,45 +586,50 @@ function drawMarseilleSign(cx){
 
 function drawVelodrome(cx){
   const x=sx(cx),gy=sy(GROUND_Y);
-  const sW=sx(268),sH=sy(64),sX=x-sW/2,sY=gy-sH;
-  // Body
-  ctx.fillStyle='#9B1F37'; ctx.fillRect(sX,sY,sW,sH);
-  ctx.fillStyle='#5C1526'; ctx.fillRect(sX,sY,sW,sy(6)); ctx.fillRect(sX,gy-sy(12),sW,sy(12));
-  // Facade windows
-  ctx.fillStyle='#EBC0C8';
-  for(let wi=0;wi<7;wi++) ctx.fillRect(sX+sx(16+wi*34),sY+sy(12),sx(18),sy(28));
-  // OM text
-  ctx.fillStyle='#FECBD2'; ctx.font=`900 ${sx(20)}px Poppins,sans-serif`; ctx.textAlign='center';
-  ctx.fillText('OM',x,gy-sH/2+sy(7));
-  // THE COCOON ARCH ROOF (the most iconic element)
-  const archW=sW+sx(22),archH=sy(60),archX=x-archW/2;
-  ctx.fillStyle='#F0E8F0';
-  ctx.beginPath();
-  ctx.moveTo(archX,sY+sy(3));
-  ctx.bezierCurveTo(archX+archW*0.12,sY-archH*0.52,archX+archW*0.88,sY-archH*0.52,archX+archW,sY+sy(3));
-  ctx.lineTo(archX+archW,sY+sy(8)); ctx.lineTo(archX,sY+sy(8)); ctx.closePath(); ctx.fill();
-  // Ribs on the arch
-  ctx.strokeStyle='#EBC0C8'; ctx.lineWidth=sx(1.2);
-  for(let ri=1;ri<8;ri++){
-    const t2=ri/8;
-    const ribX=archX+t2*archW;
-    const ribTop=sY+sy(3)-archH*4*t2*(1-t2);
-    ctx.beginPath(); ctx.moveTo(ribX,sY+sy(3)); ctx.lineTo(ribX,ribTop); ctx.stroke();
+  const sW=sx(266),boxH=sy(48),sX=x-sW/2,boxTop=gy-boxH;
+  const outline='#C0395A';
+
+  // ── COCOON ARCH (crescent blanc, contour bordeaux) ──
+  const archW=sW+sx(36),archX=x-archW/2,baseY=boxTop+sy(2);
+  const apexTop=baseY-sy(96),apexBot=baseY-sy(56);
+  function archPath(){
+    ctx.beginPath();
+    ctx.moveTo(archX,baseY);
+    ctx.bezierCurveTo(archX+archW*0.20,apexTop,archX+archW*0.80,apexTop,archX+archW,baseY);
+    ctx.bezierCurveTo(archX+archW*0.80,apexBot,archX+archW*0.20,apexBot,archX,baseY);
+    ctx.closePath();
   }
-  // Arch outline
-  ctx.strokeStyle='#C44060'; ctx.lineWidth=sx(2.5);
-  ctx.beginPath(); ctx.moveTo(archX,sY+sy(3));
-  ctx.bezierCurveTo(archX+archW*0.12,sY-archH*0.52,archX+archW*0.88,sY-archH*0.52,archX+archW,sY+sy(3));
-  ctx.stroke();
-  // "MARSEILLE" text on arch interior
-  ctx.fillStyle='#5C1526'; ctx.font=`800 ${sx(9)}px Poppins,sans-serif`; ctx.textAlign='center';
-  ctx.fillText('MARSEILLE',x,sY-archH*0.26);
-  // Floodlights
-  [0.1,0.32,0.68,0.9].forEach(pct=>{
-    const px=sX+sW*pct;
-    ctx.fillStyle='#5C1526'; ctx.fillRect(px-sx(2),sY-sy(36),sx(4),sy(36));
-    ctx.fillStyle='#EBC0C8'; ctx.fillRect(px-sx(7),sY-sy(40),sx(14),sy(6));
+  archPath(); ctx.fillStyle='#EFEAEC'; ctx.fill();
+  // nervures verticales discrètes
+  ctx.save(); archPath(); ctx.clip();
+  ctx.strokeStyle='rgba(192,57,90,0.35)'; ctx.lineWidth=sx(1.4);
+  for(let ri=1;ri<10;ri++){ const rx=archX+archW*(ri/10); ctx.beginPath(); ctx.moveTo(rx,baseY+sy(2)); ctx.lineTo(rx,apexTop); ctx.stroke(); }
+  ctx.restore();
+  archPath(); ctx.strokeStyle=outline; ctx.lineWidth=sx(3); ctx.lineJoin='round'; ctx.stroke();
+  // MARSEILLE
+  ctx.fillStyle='#4A1020'; ctx.font=`800 ${sx(12)}px Poppins,sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('MARSEILLE',x,baseY-sy(72));
+
+  // ── TRIBUNE (box bordeaux + fenêtres + OM) ──
+  ctx.fillStyle='#9B1F37'; ctx.fillRect(sX,boxTop,sW,boxH);
+  ctx.fillStyle='#5C1526'; ctx.fillRect(sX,gy-sy(8),sW,sy(8));
+  // fenêtres verticales pâles
+  ctx.fillStyle='rgba(255,224,232,0.26)';
+  const nW=9,wW=sx(15),wGap=(sW-sx(14)-nW*wW)/(nW-1);
+  for(let i=0;i<nW;i++) ctx.fillRect(sX+sx(7)+i*(wW+wGap),boxTop+sy(9),wW,boxH-sy(20));
+  // OM
+  ctx.fillStyle='#F2E6EA'; ctx.font=`900 ${sx(28)}px Poppins,sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('OM',x,boxTop+boxH*0.52);
+
+  // ── MÂTS D'ÉCLAIRAGE ──
+  [0.16,0.39,0.61,0.84].forEach(pct=>{
+    const mx=sX+sW*pct,poleTop=boxTop-sy(30);
+    ctx.strokeStyle='#7A1A2E'; ctx.lineWidth=sx(2.4); ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(mx,boxTop); ctx.lineTo(mx,poleTop); ctx.stroke();
+    ctx.fillStyle='#E8DCE0'; ctx.beginPath(); ctx.roundRect(mx-sx(10),poleTop-sy(6),sx(20),sy(8),sx(2)); ctx.fill();
+    ctx.strokeStyle=outline; ctx.lineWidth=sx(1.6); ctx.stroke();
   });
+  ctx.textBaseline='alphabetic';
 }
 
 function drawUFO(cx,cy,t){
@@ -826,23 +815,25 @@ function drawStar(lx,ly,rot){
 // ═══════════════════════════════════════════════════
 const NAIL_DESIGNS=[
   // 1. Olive wavy — vert olive + swipes crème + dots gel
-  {body:'#7A8840',tip:'#5C6828',a1:'#C8D46A',a2:'#D8E48A',p:'olive_wavy'},
+  {body:'#7C8A42',tip:'#5C6828',cap:'#6E7A38',a1:'#D8E0A0',a2:'#E6EDB8',p:'olive_wavy'},
   // 2. Coquillage bleu-jaune — nude + rayons éventail bleu
-  {body:'#F5F0DC',tip:'#C8B888',a1:'#3A6CB8',a2:'#E8C840',p:'seashell'},
+  {body:'#F4EFDB',tip:'#C8B888',cap:'#CBB488',a1:'#3A6CB8',a2:'#D9B43A',p:'seashell'},
   // 3. Teal + tourbillons roses/lilas — signature Janne
-  {body:'#1A7A58',tip:'#0F5A40',a1:'#E03890',a2:'#C080E0',p:'teal_swirls'},
+  {body:'#17855E',tip:'#0F5A40',cap:'#13684A',a1:'#E03890',a2:'#B884E0',p:'teal_swirls'},
   // 4. Bordeaux léopard — tons rouges profonds
-  {body:'#5A1825',tip:'#3A0E18',a1:'#3A0E18',a2:'#8A2838',p:'leopard'},
+  {body:'#5A1824',tip:'#3A0E18',cap:'#3A1420',a1:'#2A0C14',a2:'#A86A4A',p:'leopard'},
   // 5. Floral marguerite — nude avec fleurs bleues & vertes
-  {body:'#F2E8DC',tip:'#C8B090',a1:'#3A80C8',a2:'#40A840',a3:'#E8C820',p:'floral'},
+  {body:'#F2E9DA',tip:'#C8B090',cap:'#C9B79B',a1:'#4A8AD0',a2:'#3FAE4A',a3:'#E8C820',p:'floral'},
   // 6. Bleu ciel + étoiles marines — baby blue stars
-  {body:'#B0D0EF',tip:'#7AAAD0',a1:'#1A3060',p:'stars_blue'},
+  {body:'#AFD2EE',tip:'#7AAAD0',cap:'#9CC4E8',a1:'#1A3068',p:'stars_blue'},
   // 7. Arc-en-ciel rayures — French multicolore
-  {body:'#F0D8C0',tip:'#C8A888',a1:'',p:'rainbow'},
+  {body:'#ECD8BC',tip:'#C8A888',cap:'#CDB89A',a1:'',p:'rainbow'},
   // 8. Kaki + studs argentés — chic et graphique
-  {body:'#8A9E30',tip:'#6A7A20',a1:'#303030',p:'studs'},
+  {body:'#88A02E',tip:'#6A7A20',cap:'#6E8430',a1:'#2A2E22',p:'studs'},
   // 9. Folk bleu Delft — nude + motifs éventail cobalt
-  {body:'#F5EFEA',tip:'#C8B0A0',a1:'#2A5AB8',p:'folk_blue'},
+  {body:'#F4EEE8',tip:'#C8B0A0',cap:'#CBB6A4',a1:'#2453B0',p:'folk_blue'},
+  // 10. Petits poissons — bleu / jaune / rouge sur fond océan
+  {body:'#79C2D6',tip:'#3E94AB',cap:'#4FA0B4',a1:'#2E66C8',a2:'#F0C42E',a3:'#D63A2E',p:'fish'},
 ];
 
 function drawNailArt(x,y,w,h,d){
@@ -955,10 +946,13 @@ function drawNailArt(x,y,w,h,d){
       break;
 
     case 'rainbow':
-      // Rayures horizontales multicolores
-      const stripeColors=['#7ABCDC','#F0A8B8','#F0DC40','#F07828','#C82828','#80A878','#FFFFFF'];
-      const strH=sy(9.5); let sy5=y; let ci=0;
-      while(sy5<y+h){ ctx.fillStyle=stripeColors[ci%stripeColors.length]; ctx.fillRect(x,sy5,w,Math.min(strH,y+h-sy5)); sy5+=strH; ci++; }
+      // Clusters de fines rayures arc-en-ciel sur fond nude
+      const rbCols=['#E07070','#EAA24E','#ECD24E','#6FB86A','#5AA8DC','#9C7AC8'];
+      const rbH=sy(3.4), rbGap=sy(150);
+      for(let cy0=y+sy(34); cy0<y+h; cy0+=rbGap){
+        let yy=cy0;
+        rbCols.forEach(c=>{ if(yy>y+h-sy(2))return; ctx.fillStyle=c; ctx.fillRect(x,yy,w,rbH); yy+=rbH+sy(2.4); });
+      }
       break;
 
     case 'studs':
@@ -1001,25 +995,88 @@ function drawNailArt(x,y,w,h,d){
         });
       }
       break;
+
+    case 'fish':
+      // Petits poissons qui nagent — bleu / jaune / rouge
+      const fishCols=[d.a1,d.a2,d.a3];
+      let fk=Math.floor((y<0?0:y)/sy(30))%3;
+      for(let fy=y+sy(24); fy<y+h-sy(10); fy+=sy(30)){
+        drawFishAt(x+w*((fk%2===0)?0.36:0.62), fy, sx(9), fishCols[fk%3]);
+        fk++;
+      }
+      break;
   }
   ctx.restore();
 }
 
+// ── Cartoon press-on rendering (gros contour + cap glossy) ──
+const PIPE_OUTLINE='#3A2A1E';
+function pipePath(px,py,w,h,r,roundSide){
+  ctx.beginPath();
+  if(roundSide==='bottom'){
+    ctx.moveTo(px,py); ctx.lineTo(px+w,py); ctx.lineTo(px+w,py+h-r);
+    ctx.arcTo(px+w,py+h,px+w-r,py+h,r); ctx.lineTo(px+r,py+h);
+    ctx.arcTo(px,py+h,px,py+h-r,r); ctx.closePath();
+  }else{
+    ctx.moveTo(px,py+h); ctx.lineTo(px+w,py+h); ctx.lineTo(px+w,py+r);
+    ctx.arcTo(px+w,py,px+w-r,py,r); ctx.lineTo(px+r,py);
+    ctx.arcTo(px,py,px,py+r,r); ctx.closePath();
+  }
+}
+function drawCapGloss(px,py,w,h,roundSide){
+  ctx.save(); pipePath(px,py,w,h,Math.min(w,h)*0.42,roundSide); ctx.clip();
+  const shineY=roundSide==='bottom'?py+h*0.30:py+h*0.70;
+  ctx.fillStyle='rgba(255,255,255,0.36)';
+  ctx.beginPath(); ctx.ellipse(px+w*0.40,shineY,w*0.30,h*0.20,-0.25,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,0.13)';
+  ctx.fillRect(px,roundSide==='bottom'?py+h-h*0.26:py,w,h*0.26);
+  ctx.restore();
+}
+function bodySheen(px,py,w,h){
+  ctx.save(); ctx.beginPath(); ctx.rect(px,py,w,h); ctx.clip();
+  ctx.fillStyle='rgba(255,255,255,0.11)'; ctx.fillRect(px+w*0.14,py,w*0.14,h);
+  ctx.fillStyle='rgba(0,0,0,0.07)'; ctx.fillRect(px+w*0.80,py,w*0.20,h);
+  ctx.restore();
+}
+function drawFishAt(cx,cy,r,col){
+  // poisson orienté vers la gauche (sens du défilement)
+  ctx.fillStyle=col;
+  ctx.beginPath(); ctx.moveTo(cx+r*0.65,cy); ctx.lineTo(cx+r*1.5,cy-r*0.7); ctx.lineTo(cx+r*1.5,cy+r*0.7); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(cx+r*0.1,cy-r*0.5); ctx.lineTo(cx+r*0.5,cy-r*0.95); ctx.lineTo(cx+r*0.55,cy-r*0.4); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(cx,cy,r,r*0.62,0,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.30)'; ctx.lineWidth=sx(1); ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,0.32)'; ctx.beginPath(); ctx.ellipse(cx-r*0.05,cy-r*0.26,r*0.5,r*0.2,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#FFFFFF'; ctx.beginPath(); ctx.arc(cx-r*0.52,cy-r*0.08,r*0.27,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#16202A'; ctx.beginPath(); ctx.arc(cx-r*0.52,cy-r*0.08,r*0.13,0,Math.PI*2); ctx.fill();
+}
 function drawNailPipe(lx,topH,gap,dIdx){
   const d=NAIL_DESIGNS[dIdx%NAIL_DESIGNS.length];
-  const px=sx(lx),pw=sx(PW),tipH=sy(24);
-  // TOP
-  const topBot=sy(topH),topBodyH=topBot-tipH;
-  if(topBodyH>0){ ctx.fillStyle=d.body; ctx.fillRect(px,0,pw,topBodyH); drawNailArt(px,0,pw,topBodyH,d); }
-  ctx.fillStyle=d.tip; ctx.beginPath(); ctx.roundRect(px-sx(5),topBot-tipH,pw+sx(10),tipH+sy(2),[0,0,sx(9),sx(9)]); ctx.fill();
-  ctx.fillStyle='rgba(255,255,255,0.2)'; ctx.fillRect(px-sx(5),topBot-tipH+sy(4),pw+sx(10),sy(1.5));
-  ctx.strokeStyle='rgba(0,0,0,0.18)'; ctx.lineWidth=sx(1.5); ctx.strokeRect(px,0,pw,topBot);
-  // BOTTOM
-  const botTop=sy(topH+gap),botBot=canvas.height,botBodyH=botBot-botTop-tipH;
-  ctx.fillStyle=d.tip; ctx.beginPath(); ctx.roundRect(px-sx(5),botTop-sy(2),pw+sx(10),tipH+sy(2),[sx(9),sx(9),0,0]); ctx.fill();
-  ctx.fillStyle='rgba(255,255,255,0.2)'; ctx.fillRect(px-sx(5),botTop+tipH-sy(5),pw+sx(10),sy(1.5));
-  if(botBodyH>0){ ctx.fillStyle=d.body; ctx.fillRect(px,botTop+tipH,pw,botBodyH); drawNailArt(px,botTop+tipH,pw,botBodyH,d); }
-  ctx.strokeStyle='rgba(0,0,0,0.18)'; ctx.lineWidth=sx(1.5); ctx.strokeRect(px,botTop,pw,botBot-botTop);
+  const px=sx(lx), pw=sx(PW), out=PIPE_OUTLINE, ow=sx(3.4);
+  const cap=d.cap||d.tip, capH=sy(30), capR=sx(15);
+
+  // TOP — cap au bord du gap (en bas)
+  const topBot=sy(topH), tpY=-sy(6), tpH=topBot-tpY;
+  if(tpH>0){
+    pipePath(px,tpY,pw,tpH,capR,'bottom'); ctx.fillStyle=d.body; ctx.fill();
+    const bH=tpH-capH;
+    if(bH>0){ ctx.save(); ctx.beginPath(); ctx.rect(px,tpY,pw,bH); ctx.clip(); drawNailArt(px,tpY,pw,bH,d); bodySheen(px,tpY,pw,bH); ctx.restore(); }
+    pipePath(px,topBot-capH,pw,capH,capR,'bottom'); ctx.fillStyle=cap; ctx.fill();
+    drawCapGloss(px,topBot-capH,pw,capH,'bottom');
+    ctx.strokeStyle=out; ctx.lineWidth=ow*0.7; ctx.beginPath(); ctx.moveTo(px,topBot-capH); ctx.lineTo(px+pw,topBot-capH); ctx.stroke();
+    pipePath(px,tpY,pw,tpH,capR,'bottom'); ctx.strokeStyle=out; ctx.lineWidth=ow; ctx.lineJoin='round'; ctx.stroke();
+  }
+
+  // BOTTOM — cap au bord du gap (en haut)
+  const botTop=sy(topH+gap), botBot=canvas.height+sy(6), bpH=botBot-botTop;
+  if(bpH>0){
+    pipePath(px,botTop,pw,bpH,capR,'top'); ctx.fillStyle=d.body; ctx.fill();
+    const byy=botTop+capH, bH2=botBot-byy;
+    if(bH2>0){ ctx.save(); ctx.beginPath(); ctx.rect(px,byy,pw,bH2); ctx.clip(); drawNailArt(px,byy,pw,bH2,d); bodySheen(px,byy,pw,bH2); ctx.restore(); }
+    pipePath(px,botTop,pw,capH,capR,'top'); ctx.fillStyle=cap; ctx.fill();
+    drawCapGloss(px,botTop,pw,capH,'top');
+    ctx.strokeStyle=out; ctx.lineWidth=ow*0.7; ctx.beginPath(); ctx.moveTo(px,botTop+capH); ctx.lineTo(px+pw,botTop+capH); ctx.stroke();
+    pipePath(px,botTop,pw,bpH,capR,'top'); ctx.strokeStyle=out; ctx.lineWidth=ow; ctx.lineJoin='round'; ctx.stroke();
+  }
 }
 
 // ═══════════════════════════════════════════════════
